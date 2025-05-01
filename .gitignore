@@ -1,0 +1,4 @@
+csample/build
+csample/lib
+zig-out
+.zig-cache
