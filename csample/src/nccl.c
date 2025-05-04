@@ -11,6 +11,6 @@ void sleep_us(unsigned long microseconds)
 
 ncclResult_t ncclAllReduce(const void* sendbuff, void* recvbuff, size_t count, ncclDataType_t datatype, ncclRedOp_t op,
                            ncclComm_t comm, cudaStream_t stream) {
-    sleep_us(1000 * 500);
+    sleep_us(1000 * 50);
     return ncclSuccess;
 }
