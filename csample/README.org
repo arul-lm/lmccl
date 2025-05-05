@@ -2,12 +2,14 @@
 This shows the minimal setup required to build a nccl like clone that can be safely passed to nccl-tests or any library that links nccl.
 
 * How to build?
+#+begin_src bash
 mkdir build
 cd build
 nvcc --ptxas-options=-v --compiler-options '-fPIC' -o lmccl.so --shared ../src/sleep.cu ../src/nccl.c
+#+end_src
 
 * How to link to nccl?
 - Pass the path to the build shared library to LD_PRELOAD
-LD_PRELOAD=/home/arul/dev/lmccl/csample/build/lmccl.so ./build/all_reduce_perf -b 1K -e 256M -f 2 -d half -G 20 -w 10 -n 50 -g 2 
-
-
+  #+begin_src bash
+    LD_PRELOAD=/home/arul/dev/lmccl/csample/build/lmccl.so ./build/all_reduce_perf -b 1K -e 256M -f 2 -d half -G 20 -w 10 -n 50 -g 2
+  #+end_src
