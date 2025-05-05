@@ -21,19 +21,17 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS include/nccl.h)
 # set_target_properties(lmccl_obj PROPERTIES LINKER_LANGUAGE CXX POSITION_INDEPENDENT_CODE 1 VERSION ${MSCCLPP_VERSION} SOVERSION ${MSCCLPP_SOVERSION})
 
 add_library(lmccl SHARED)
-# target_link_libraries(lmccl PUBLIC lmccl_obj)
-target_sources(lmccl PRIVATE ${SOURCES})
+target_sources(lmccl PRIVATE src/sleep.o ${SOURCES})
 target_sources(lmccl PUBLIC FILE_SET HEADERS FILES ${HEADERS})
 target_include_directories(lmccl PRIVATE include SYSTEM)
 set_target_properties(lmccl PROPERTIES VERSION ${MSCCLPP_VERSION} SOVERSION ${MSCCLPP_SOVERSION})
-
+set_property(TARGET lmccl PROPERTY POSITION_INDEPENDENT_CODE ON)
 # add_library(lmccl_static STATIC)
 # target_link_libraries(lmccl_static PUBLIC lmccl_obj)
 # set_target_properties(lmccl_static PROPERTIES VERSION ${MSCCLPP_VERSION} SOVERSION ${MSCCLPP_SOVERSION})
 
 # install(TARGETS lmccl_obj
 #   FILE_SET HEADERS DESTINATION ${INSTALL_PREFIX}/include)
-message("CMSD" ${CMAKE_CURRENT_SOURCE_DIR})
 install(TARGETS lmccl
   LIBRARY DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 # install(TARGETS lmccl_static
